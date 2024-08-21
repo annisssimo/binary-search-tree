@@ -16,19 +16,18 @@ class Tree {
 
     return root;
   }
-}
 
-const prettyPrint = (node, prefix = '', isLeft = true) => {
-  if (node === null) {
-    return;
+  insert(value, node = this.root) {
+    if (node === null) return new Node(value);
+
+    if (value < node.data) {
+      node.left = this.insert(value, node.left);
+    } else if (value > node.data) {
+      node.right = this.insert(value, node.right);
+    }
+
+    return node;
   }
-  if (node.right !== null) {
-    prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
-  }
-  console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
-  if (node.left !== null) {
-    prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
-  }
-};
+}
 
 export default Tree;
