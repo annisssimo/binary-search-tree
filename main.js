@@ -10,3 +10,5 @@ prettyPrint(tree.root);
 tree.deleteItem(4);
 console.log('tree with 4 deleted');
 prettyPrint(tree.root);
+console.log('searching for 4:', tree.find(4));
+console.log('searching for 1:', tree.find(1));
