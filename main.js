@@ -7,3 +7,6 @@ const tree = new Tree(array);
 prettyPrint(tree.root);
 tree.insert(444);
 prettyPrint(tree.root);
+tree.deleteItem(4);
+console.log('tree with 4 deleted');
+prettyPrint(tree.root);
