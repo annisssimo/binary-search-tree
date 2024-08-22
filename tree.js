@@ -78,7 +78,6 @@ class Tree {
   inOrder(callback, node = this.root) {
     if (!callback) throw new Error('A callback is required');
 
-    callback(node);
     if (node !== null) {
       this.inOrder(callback, node.left);
       callback(node);
@@ -89,7 +88,6 @@ class Tree {
   preOrder(callback, node = this.root) {
     if (!callback) throw new Error('A callback is required');
 
-    callback(node);
     if (node !== null) {
       callback(node);
       this.inOrder(callback, node.left);
@@ -100,7 +98,6 @@ class Tree {
   postOrder(callback, node = this.root) {
     if (!callback) throw new Error('A callback is required');
 
-    callback(node);
     if (node !== null) {
       this.inOrder(callback, node.left);
       this.inOrder(callback, node.right);
@@ -111,8 +108,8 @@ class Tree {
   height(node) {
     if (node === null) return -1;
 
-    const leftHeight = height(node.left);
-    const rightHeight = height(node.right);
+    const leftHeight = this.height(node.left);
+    const rightHeight = this.height(node.right);
 
     return Math.max(leftHeight, rightHeight) + 1;
   }
@@ -132,11 +129,14 @@ class Tree {
   isBalanced(node = this.root) {
     if (node === null) return true;
 
-    if (Math.abs(this.height(node.left) - this.height(node.right)) > 1) {
+    const leftHeight = this.height(node.left);
+    const rightHeight = this.height(node.right);
+
+    if (Math.abs(leftHeight - rightHeight) > 1) {
       return false;
     }
 
-    return true;
+    return this.isBalanced(node.left) && this.isBalanced(node.right);
   }
 
   rebalance() {

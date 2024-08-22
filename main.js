@@ -1,14 +1,56 @@
 import Tree from './tree.js';
 import prettyPrint from './prettyPrint.js';
 
-const array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-const tree = new Tree(array);
+// Generate a random array of numbers
+const generateRandomArray = (size, max) => {
+  return Array.from({ length: size }, () => Math.floor(Math.random() * max));
+};
 
+// Create a tree
+const randomArray = generateRandomArray(15, 100);
+const tree = new Tree(randomArray);
+
+console.log('Initial tree:');
 prettyPrint(tree.root);
-tree.insert(444);
+console.log('Is the tree balanced?', tree.isBalanced());
+
+// Traverse the tree in different orders
+console.log('Level order:');
+tree.levelOrder((node) => console.log(node.data));
+
+console.log('Pre order:');
+tree.preOrder((node) => console.log(node.data));
+
+console.log('In order:');
+tree.inOrder((node) => console.log(node.data));
+
+console.log('Post order:');
+tree.postOrder((node) => console.log(node.data));
+
+// Unbalance the tree
+const largeValues = [101, 105, 110, 115, 120];
+largeValues.forEach((value) => tree.insert(value));
+
+console.log('Tree after inserting large values:');
 prettyPrint(tree.root);
-tree.deleteItem(4);
-console.log('tree with 4 deleted');
+console.log('Is the tree balanced?', tree.isBalanced());
+
+// Rebalance the tree
+tree.rebalance();
+
+console.log('Tree after rebalancing:');
 prettyPrint(tree.root);
-console.log('searching for 4:', tree.find(4));
-console.log('searching for 1:', tree.find(1));
+console.log('Is the tree balanced?', tree.isBalanced());
+
+// Traverse the tree in different orders again
+console.log('Level order:');
+tree.levelOrder((node) => console.log(node.data));
+
+console.log('Pre order:');
+tree.preOrder((node) => console.log(node.data));
+
+console.log('In order:');
+tree.inOrder((node) => console.log(node.data));
+
+console.log('Post order:');
+tree.postOrder((node) => console.log(node.data));
