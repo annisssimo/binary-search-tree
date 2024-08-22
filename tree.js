@@ -128,6 +128,23 @@ class Tree {
       return this.depth(node, node.right, currentDepth + 1);
     }
   }
+
+  isBalanced(node = this.root) {
+    if (node === null) return true;
+
+    if (Math.abs(this.height(node.left) - this.height(node.right)) > 1) {
+      return false;
+    }
+
+    return true;
+  }
+
+  rebalance() {
+    const nodes = [];
+    this.inOrder((node) => nodes.push(node.data));
+
+    this.root = this.buildTree(nodes);
+  }
 }
 
 export default Tree;
