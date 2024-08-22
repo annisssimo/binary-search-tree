@@ -74,6 +74,39 @@ class Tree {
       if (currentNode.right) queue.push(currentNode.right);
     }
   }
+
+  inOrder(callback, node = this.root) {
+    if (!callback) throw new Error('A callback is required');
+
+    callback(node);
+    if (node !== null) {
+      this.inOrder(callback, node.left);
+      callback(node);
+      this.inOrder(callback, node.right);
+    }
+  }
+
+  preOrder(callback, node = this.root) {
+    if (!callback) throw new Error('A callback is required');
+
+    callback(node);
+    if (node !== null) {
+      callback(node);
+      this.inOrder(callback, node.left);
+      this.inOrder(callback, node.right);
+    }
+  }
+
+  postOrder(callback, node = this.root) {
+    if (!callback) throw new Error('A callback is required');
+
+    callback(node);
+    if (node !== null) {
+      this.inOrder(callback, node.left);
+      this.inOrder(callback, node.right);
+      callback(node);
+    }
+  }
 }
 
 export default Tree;
