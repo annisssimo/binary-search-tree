@@ -107,6 +107,27 @@ class Tree {
       callback(node);
     }
   }
+
+  height(node) {
+    if (node === null) return -1;
+
+    const leftHeight = height(node.left);
+    const rightHeight = height(node.right);
+
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
+
+  depth(node, current = this.root, currentDepth = 0) {
+    if (node === null) return -1;
+
+    if (node === current) return currentDepth;
+
+    if (node.data < current.data) {
+      return this.depth(node, node.left, currentDepth + 1);
+    } else {
+      return this.depth(node, node.right, currentDepth + 1);
+    }
+  }
 }
 
 export default Tree;
